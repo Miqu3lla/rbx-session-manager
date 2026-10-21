@@ -1,3 +1,10 @@
+#[tauri::command]
+fn hello_world() -> String {
+  "Hello people".to_string()
+}
+
+
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
@@ -11,6 +18,7 @@ pub fn run() {
       }
       Ok(())
     })
+    .invoke_handler(tauri::generate_handler![hello_world])
     .run(tauri::generate_context!())
     .expect("error while building tauri application");
 }
